@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Вкладка</title>
+        <style>
+            
+            button {
+                height: 30px;
+                position: absolute;
+                margin-left: 180px;
+                border-radius: 200%;
+                
+            }
+
+            input {
+                position: absolute;
+                height: 25px;
+            }
+
+        </style>
+        <script>
+             function sendValue(value) {
+                jsonData = JSON.stringify(value);
+                console.log(jsonData);
+                return jsonData;
+            }
+        </script>
+    </head>
+    <body>
+        
+            <input id="transfer">
+            <button onclick="setTimeout(() => sendValue(transfer.value), 10 )"> 
+            </button>
+        
+
+
+
+        <script type="module">
+
+            import { saveAs } from 'file-saver';
+            let blob = new Blob([JSON.stringify(jsonData)], { type: 'application/json' })
+            saveAs(blob, 'export.json')
+
+            var data = "";
+            var jsonData = '';
+
+            function sendValue(value) {
+                jsonData = JSON.stringify(value);
+                console.log(jsonData);
+                return jsonData;
+            }
+
+            let takeValue = sendValue();
+            export { takeValue };
+
+            function download(content, fileName, contentType) {
+                var a = document.createElement("a");
+                var file = new Blob([content], {type: contentType});
+                a.href = URL.createObjectURL(file);
+                a.download = fileName;
+                a.click();
+                console.log(a.download);
+            }
+            
+            download(jsonData, 'json.txt', 'text/plain');
+
+            // const a = document.createElement("a");
+            // a.href = URL.createObjectURL(new Blob([JSON.stringify(jsonData, null, 2)], {
+            //     type: "text/plain"
+            // }));
+            // a.setAttribute("download", "data.txt");
+            // document.body.appendChild(a);
+            // a.click();
+
+    //     class JavascriptDataDownloader {
+
+    //         constructor(data={}) {
+    //         this.data = data;
+    //     }
+
+    //     download (type_of = "text/plain", filename= "data.txt") {
+    //     let body = document.querySelector('body');
+    //     const a = document.createElement("a");
+    //     a.href = URL.createObjectURL(new Blob([JSON.stringify(this.data, null, 2)], {
+    //         type: type_of
+    //     }));
+    //     a.setAttribute("download", filename);
+    //     body.appendChild(a);
+    //     a.click();
+    //     body.removeChild(a);
+    // }
+    // }   
+
+    // new JavascriptDataDownloader(jsonData).download();
+            // document.body.removeChild(a);
+
+            // async function sendValue(value) {
+                // let transfer = document.getElementById('transfer');
+                // let buttonClick = document.querySelector(".buttonClick");
+                // setTimeout(() => {
+                    // return console.log(transfer.value);
+                // }, 2000);
+                
+            // }
+        </script>
+
+        
+    </body>
+</html>
